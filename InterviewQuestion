@@ -1,0 +1,135 @@
+//   Interview Question Theory
+1. Can you explain what asynchronous programming is?
+2. How does async/await help with performance and scalability?
+3. Can you explain the difference between an async function and a regular function in JavaScript?
+4. What are some of the advantages of using async functions in JavaScript?
+5. What do you understand about await in JavaScript?(make the code somewhat synchronous)
+6. What’s the error handling strategy for promises that were rejected while awaiting?
+7.async function getData() {
+    return await Promise.resolve('I made it!');
+}
+
+const data = getData();
+console.log(data); ans is pending without .then u cannot get the IDBCursorWithValue
+8.const myPromise = () => Promise.resolve('I have resolved!');
+
+function firstFunction() {
+    myPromise().then(res => console.log(res));
+    console.log('second');
+}
+
+async function secondFunction() {
+    console.log(await myPromise());
+    console.log('second');
+}
+
+firstFunction();
+secondFunction();
+ans=>second, I have resolved! and I have resolved!, second
+9.Promise.resolve(5); what will be output
+ans is fulfilled with value 5
+
+// Promise Interview question
+1.const promise = new Promise(res => res(2));
+promise.then(v => {
+        console.log(v); //2
+        return v * 2;
+    })
+    .then(v => {
+        console.log(v);//4
+        return v * 2;
+    })
+    .then(v => {
+        console.log(v);//8
+    });
+
+
+2.What is promise
+3.what are states of Promises
+4.What is promise chaining//less probability
+5.const promise = new Promise((resolve, reject) => {
+    reject(Error('Some error occurred'));
+  })
+  promise.catch(error => console.log(error.message));
+  promise.catch(error => console.log(error.message));
+  what will be the output 
+  solution
+  Some error occurred
+  Some error occurred
+
+ 6.const promise = new Promise((resolve, reject) => {
+    reject(Error('Some Error Occurred'));
+  })
+  .catch(error => console.log(error))
+  .then(error => console.log(error));
+  
+  what will be output
+  ans
+  Some error occurred
+  undefined
+
+  7.console.log('start');
+
+  const promise1 = new Promise((resolve, reject) => {
+    console.log(1)
+  })
+  
+  console.log('end');
+
+  start
+  1
+  end
+
+  8.console.log('start');
+
+  const promise1 = new Promise((resolve, reject) => {
+    console.log(1)
+    resolve(2)
+  })
+  
+  promise1.then(res => {
+    console.log(res)
+  })
+  
+  console.log('end');
+  start
+  1
+  end
+  2
+
+  9.console.log('start');
+
+  const promise1 = new Promise((resolve, reject) => {
+    console.log(1)
+  })
+  
+  promise1.then(res => {
+    console.log(2)
+  })
+  
+  console.log('end');
+  start
+  1
+  end
+
+  10
+  console.log('start')
+
+const fn = () => (new Promise((resolve, reject) => {
+  console.log(1);
+  resolve('success')
+}))
+
+console.log('middle')
+
+fn().then(res => {
+  console.log(res)
+})
+
+console.log('end')
+
+start
+middle
+1
+end
+success
